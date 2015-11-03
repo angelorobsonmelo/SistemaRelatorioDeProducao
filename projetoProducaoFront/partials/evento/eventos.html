@@ -1,0 +1,77 @@
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="box box-primary">
+                <div class="box-body">
+	                <div class="row">
+	                    <span class="text-bold col-sm-1">Filtros: </span>
+	                    <div class="col-sm-5">
+	                        <select class="form-control" ng-model="filtro.categoria" ng-change="resetTipo()">
+	                            <option value=""> - Categoria -</option>
+								<option ng-repeat="categoria in categoriasEvento" ng-value="categoria.id">{{categoria.descricao}}</option>
+								
+	                        </select>
+	                    </div>
+	                    <div class="col-sm-5">
+		                    <select class="form-control" ng-model="filtro.tipo">
+		                        <option value=""> - Tipo -</option>
+		                        <option ng-repeat="tipo in tiposEvento" ng-value="tipo.id" ng-if="tipo.categoria == filtro.categoria" >{{tipo.descricao}}</option>
+		                        
+		                    </select>
+	                    </div>
+	                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        
+        <div class="col-sm-10 col-sm-offset-1">
+            <div ng-repeat="evento in eventos | filter: filtro ">
+
+                <div class="box box-solid box-primary">
+                    <div class="box-header">
+                        <div class="box-title">{{evento.nome}} | {{evento.data | date : 'dd/MM/yyyy'}}</div>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-primary btn-sm" ng-click="isCollapsed = !isCollapsed" >
+                                <i class="fa" ng-class="{'fa-minus': !isCollapsed, 'fa-plus': isCollapsed}"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body" collapse="isCollapsed">
+                        <span class="text-bold">Categoria:</span> <span ng-bind="descricaoCategoriaEventoPorId(evento.categoria)"></span>
+                        <br/>
+                        <span class="text-bold">Tipo:</span> <span ng-bind="descricaoTipoEventoPorId(evento.tipo)"></span>
+                        <br/><br/>
+                        <span class="text-bold">Clientes:</span>                  
+                        <div class="well">
+                            <p>
+                            	<a ng-href="#/cliente/{{cliente.id}}" ng-repeat="cliente in evento.clientes" >
+                            		<span class="btn btn-sm bg-blue margin">{{cliente.nome}}</span>
+                           		</a>
+                       		</p>
+						</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+<!--
+    <div class="row">
+
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Eventos</div>
+            <div class="panel-body">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+-->
+</div>

@@ -1,0 +1,536 @@
+<style>
+.steps-indicator {
+	position: absolute;
+	/* changing this line of code to absolute instead of relative AND adding top:0; to this section pushed the navigation to the top of the modal */
+	right: 0;
+	bottom: 0;
+	left: 0;
+	top: 0;
+	height: 30px;
+	padding: 0;
+	margin: 0;
+	margin-bottom: 15px;
+	margin-top: 30px;
+	/* controls the distance the circles and steps are from top of modal */
+	list-style: none;
+}
+
+.steps-indicator:before {
+	position: absolute;
+	height: 1px;
+	background-color: #e6e6e6;
+	content: '';
+}
+
+.steps-indicator.steps-2:before {
+	right: calc(25%);
+	left: calc(25%);
+}
+
+.steps-indicator.steps-3:before {
+	right: calc(16.666666666666668%);
+	left: calc(16.666666666666668%);
+}
+
+.steps-indicator.steps-4:before {
+	right: calc(12.5%);
+	left: calc(12.5%);
+}
+
+.steps-indicator.steps-5:before {
+	right: calc(10%);
+	left: calc(10%);
+}
+
+.steps-indicator.steps-6:before {
+	right: calc(8.333333333333334%);
+	left: calc(8.333333333333334%);
+}
+
+.steps-indicator.steps-7:before {
+	right: calc(7.142857142857143%);
+	left: calc(7.142857142857143%);
+}
+
+.steps-indicator.steps-8:before {
+	right: calc(6.25%);
+	left: calc(6.25%);
+}
+
+.steps-indicator.steps-9:before {
+	right: calc(5.555555555555555%);
+	left: calc(5.555555555555555%);
+}
+
+.steps-indicator.steps-10:before {
+	right: calc(5%);
+	left: calc(5%);
+}
+
+.steps-indicator * {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.steps-indicator li {
+	position: relative;
+	float: left;
+	padding: 0;
+	padding-top: 10px;
+	margin: 0;
+	line-height: 15px;
+	text-align: center;
+}
+
+.steps-indicator li a {
+	font-weight: bold;
+	color: #808080;
+	text-decoration: none;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: 0.25s;
+}
+
+.steps-indicator li a:before {
+	position: absolute;
+	top: -7px;
+	left: calc(43%);
+	width: 14px;
+	height: 14px;
+	background-color: #e6e6e6;
+	border-radius: 100%;
+	content: '';
+	transition: 0.25s;
+}
+
+.steps-indicator li a:hover {
+	color: #4d4d4d;
+}
+
+.steps-indicator.steps-2 li {
+	width: calc(50%);
+}
+
+.steps-indicator.steps-3 li {
+	width: calc(33.333333333333336%);
+}
+
+.steps-indicator.steps-4 li {
+	width: calc(25%);
+}
+
+.steps-indicator.steps-5 li {
+	width: calc(20%);
+}
+
+.steps-indicator.steps-6 li {
+	width: calc(16.666666666666668%);
+}
+
+.steps-indicator.steps-7 li {
+	width: calc(14.285714285714286%);
+}
+
+.steps-indicator.steps-8 li {
+	width: calc(12.5%);
+}
+
+.steps-indicator.steps-9 li {
+	width: calc(11.11111111111111%);
+}
+
+.steps-indicator.steps-10 li {
+	width: calc(10%);
+}
+
+.steps-indicator.steps-11 li {
+	width: calc(9.090909090909092%);
+}
+
+.steps-indicator li.default {
+	pointer-events: none;
+}
+
+.steps-indicator li.default a:hover {
+	color: #808080;
+}
+
+.steps-indicator li.current, .steps-indicator li.editing {
+	pointer-events: none;
+}
+
+.steps-indicator li.current a:before {
+	background-color: #808080;
+}
+
+.steps-indicator li.done a:before {
+	background-color: #bcd7e5;
+	/* this color shows previously visited data */
+}
+
+.steps-indicator li.editing a:before {
+	background-color: #0e77be; /* this color reflects the current page */
+}
+</style>
+
+<div class="container-fluid" ng-init="coisa.nome='asd'">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="box box-solid box-primary">
+				<div class="box-header">
+					<h3 class="box-title text-center">Criar novo evento</h3>
+				</div>
+				<div class="box-body" style="min-height: 450px;">
+					<div class="row">
+						<div class="col-sm-10 col-sm-offset-1">
+
+							<wizard on-finish="finishedWizard()">
+							
+							<wz-step
+								title="Criar o evento">
+							<div class="row">
+								<div class="col-sm-12">
+									<br />
+									<br />
+									<br />
+									<br />
+									<br />
+
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-10 col-sm-offset-1">
+									<form class="form" ng-submit="cadastrarEvento()">
+										<div class="form-group  col-sm-6">
+											<label for="">Nome do evento</label> <input
+												ng-model="evento.nome" class="form-control" type="text"
+												placeholder="Insira um nome" required />
+										</div>
+
+										<div class="form-group col-sm-6">
+											<label>Data do evento</label>
+
+											<div class="input-group ">
+												<input id="new-event" type="text" ng-model="evento.data"
+													datepicker-popup="dd/MM/yyyy" is-open="opened" disabled
+													class="form-control" placeholder="Data do Evento" required />
+												<div class="input-group-btn">
+													<button type="button" class="btn btn-default btn-flat"
+														ng-click="open($event)">
+														<i class="fa fa-calendar"></i>
+													</button>
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-sm-6">
+											<label for="">Categoria do evento</label> <select name=""
+												id="" class="form-control" required
+												ng-model="evento.categoria">
+												<option value="">Escolha a categoria</option>
+												<option ng-repeat="categoria in categoriasEvento"
+													ng-value="categoria.id">{{categoria.descricao}}</option>
+
+
+											</select>
+										</div>
+										<div class="form-group col-sm-6">
+											<label for="">Tipo de evento</label> <select name="" id=""
+												class="form-control" required ng-model="evento.tipo">
+												<option value="">Escolha o tipo</option>
+												<option ng-repeat="tipo in tiposEvento" ng-value="tipo.id"
+													ng-if="tipo.categoria == evento.categoria">{{tipo.descricao}}</option>
+
+
+											</select>
+										</div>
+
+
+										<div class="form-group">
+											<br />
+											<button type="submit" class="btn btn-primary center-block">Criar
+												evento</button>
+										</div>
+
+									</form>
+								</div>
+							</div>
+							</wz-step>
+							
+							 <wz-step title="Vincular clientes ao evento">
+
+							<div class="row">
+								<div class="col-sm-12">
+									<br />
+									<br />
+									<br />
+									<br />
+									<br />
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-sm-12">
+								<!--
+									<div class="col-sm-5">
+										<accordion>
+											<accordion-group is-open="opt_continua.status.open">
+												<accordion-heading>
+												<div>
+													Pesquisa cont&iacute;nua <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': opt_continua.status.open, 'glyphicon-chevron-right': !opt_continua.status.open}"></i>
+												</div>
+												</accordion-heading>
+												<input type="checkbox" ng-model="p1" ng-change="checkedteste(p1,1)"> - Indicadores de desempenho
+												<br/>
+												<input type="checkbox" ng-model="p2" ng-change="checkedteste(p2,2)"> - Indicadores de competitividade
+												<br/>
+												<input type="checkbox" ng-model="p3" ng-change="checkedteste(p3,3)"> - Sondagem industrial
+												<br/>
+												<input type="checkbox" ng-model="p4" ng-change="checkedteste(p4,4)"> - Sondagem ind&uacute;strial da constru&ccedil;&atilde;o
+												<br/>
+												<input type="checkbox" ng-model="p5" ng-change="checkedteste(p5,5)"> - Sondagens especiais
+												<br/>
+												<input type="checkbox" ng-model="p6" ng-change="checkedteste(p6,6)"> - Pesquisa de investimento na ind&uacute;stria
+												<br/>
+												<input type="checkbox" ng-model="p7" ng-change="checkedteste(p7,7)"> - An&aacute;lize da sondagem da ind&uacute;stria da constru&ccedil;&atilde;o
+												<br/>
+											</accordion-group>
+										</accordion>
+									</div>
+									
+									<div class="col-sm-5">
+										<accordion>
+											<accordion-group is-open="opt_continua.status.open">
+												<accordion-heading>
+													<div>
+														Pesquisa sob encomenda <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': opt_continua.status.open, 'glyphicon-chevron-right': !opt_continua.status.open}"></i>
+													</div>
+												</accordion-heading>
+												<input type="checkbox" ng-model="p8" ng-change="checkedteste(p8,8)"> - Pesquisas setoriais industriais
+												<br/>
+												<input type="checkbox" ng-model="p9" ng-change="checkedteste(p9,9)"> - Perfis
+												<br/>
+												<input type="checkbox" ng-model="p10" ng-change="checkedteste(p10,10)"> - Diagn&oacute;sticos
+												<br/>
+												<input type="checkbox" ng-model="p11" ng-change="checkedteste(p11,11)"> - Estudos de mercado
+												<br/>
+											</accordion-group>
+										</accordion>
+									</div>
+									-->
+									
+									<div class="col-sm-5">
+								<accordion>
+									<accordion-group is-open="opt_continua.status.open">
+										<accordion-heading>
+										<div>
+											Pesquisa<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': opt_continua.status.open, 'glyphicon-chevron-right': !opt_continua.status.open}"></i>
+										</div>
+										</accordion-heading>
+										<span class="text-bold">Pesquisa cont&iacute;nua</span>
+										<br/>
+										<input type="checkbox" ng-model="p1" ng-change="checkedteste(p1,1)"> - Indicadores de desempenho
+										<br/>
+										<input type="checkbox" ng-model="p2" ng-change="checkedteste(p2,2)"> - Indicadores de competitividade
+										<br/>
+										<input type="checkbox" ng-model="p3" ng-change="checkedteste(p3,3)"> - Sondagem industrial
+										<br/>
+										<input type="checkbox" ng-model="p4" ng-change="checkedteste(p4,4)"> - Sondagem ind&uacute;strial da constru&ccedil;&atilde;o
+										<br/>
+										<input type="checkbox" ng-model="p5" ng-change="checkedteste(p5,5)"> - Sondagens especiais
+										<br/>
+										<input type="checkbox" ng-model="p6" ng-change="checkedteste(p6,6)"> - Pesquisa de investimento na ind&uacute;stria
+										<br/>
+										<input type="checkbox" ng-model="p7" ng-change="checkedteste(p7,7)"> - An&aacute;lize da sondagem da ind&uacute;stria da constru&ccedil;&atilde;o
+										<br/>
+										<span class="text-bold">Pesquisa sob encomenda</span>
+										<br/>
+										<input type="checkbox" ng-model="p8" ng-change="checkedteste(p8,8)"> - Pesquisas setoriais industriais
+										<br/>
+										<input type="checkbox" ng-model="p9" ng-change="checkedteste(p9,9)"> - Perfis
+										<br/>
+										<input type="checkbox" ng-model="p10" ng-change="checkedteste(p10,10)"> - Diagn&oacute;sticos
+										<br/>
+										<input type="checkbox" ng-model="p11" ng-change="checkedteste(p11,11)"> - Estudos de mercado
+										<br/>
+									</accordion-group>
+								</accordion>
+							</div>
+						
+							<div class="col-sm-5">
+								<accordion>
+									<accordion-group is-open="opt_continua.status.open">
+										<accordion-heading>
+											<div>
+												Inova&ccedil;&atilde;o <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': opt_continua.status.open, 'glyphicon-chevron-right': !opt_continua.status.open}"></i>
+											</div>
+										</accordion-heading>
+										<span class="text-bold">Mobiliza&ccedil;&atilde;o para inova&ccedil;&atilde;</span>
+										<br/>
+										<input type="checkbox" ng-model="i1" ng-change="inovacaocheckteste(i1,1)"> - Palestras e eventos de sensibiliza&ccedil;&atilde;o
+										<br/>
+										<span class="text-bold">Capacita&ccedil;&atilde;o</span>
+										<br/>
+										<input type="checkbox" ng-model="i2" ng-change="inovacaocheckteste(i2,2)"> - Gest&atilde;o da inova&ccedil;&atilde;o
+										<br/>
+										<input type="checkbox" ng-model="i3" ng-change="inovacaocheckteste(i3,3)"> - Elabora&ccedil;&atilde;o e gerenciamento de projetos de inova&ccedil;&atilde;o
+										<br/>
+										<input type="checkbox" ng-model="i4" ng-change="inovacaocheckteste(i4,4)"> - Ambientes inovativos (com foco em open innovation);
+										<br/>
+										<span class="text-bold">Consultorias</span>
+										<br/>
+										<input type="checkbox" ng-model="i5" ng-change="inovacaocheckteste(i5,5)"> - Realiza&ccedil;&atilde;o de diagnosticos de inova&ccedil;&atilde;o
+										<br/>
+										<input type="checkbox" ng-model="i6" ng-change="inovacaocheckteste(i6,6)"> - Elabora&ccedil;&atilde;o e implanta&ccedil;&atilde;o de planos de inova&ccedil;&atilde;o
+										<br/>
+										<input type="checkbox" ng-model="i7" ng-change="inovacaocheckteste(i7,7)"> - Elabora&ccedil;&atilde;o de projetos de capta&ccedil;&atilde;o de recursos para inova&ccedil;&atilde;o
+										<br/>
+										<span class="text-bold">Garimpagem e divulga&ccedil;&atilde;o</span>
+										<br/>
+										<input type="checkbox" ng-model="i8" ng-change="inovacaocheckteste(i8,8)"> - Editais de inova&ccedil;&atilde;o
+										<br/>
+										<input type="checkbox" ng-model="i9" ng-change="inovacaocheckteste(i9,9)"> - Pr&eacute;mios de inova&ccedil;&atilde;o (P&eacute;mio nacional de inova&ccedil;&atilde;o e Finep);
+										<br/>
+										<input type="checkbox" ng-model="i10" ng-change="inovacaocheckteste(i10,10)"> - Casos de sucesso em gest&atilde;o da inova&ccedil;&atilde;o
+										<br/>
+										<span class="text-bold">Qualifica&ccedil;&atilde;o de profissionais/bolsistas para inova&ccedil;&atilde;o na empresa</span>
+										<br/>
+										<input type="checkbox" ng-model="i11" ng-change="inovacaocheckteste(i11,11)"> - Programa de inova talentos
+										<br/>
+										
+										
+									</accordion-group>
+								</accordion>
+							</div>
+									<div class="col-sm-2">
+										<button ng-hide="pesquisou" ng-click="pesquisar()" class="btn btn-primary btn-block">Buscar</button>
+									</div>
+									
+								</div>
+								
+								
+								
+								
+							</div>
+
+							<div class="row" ng-show="pesquisou">
+								<div class="col-sm-12">
+									<table ng-table="tableParams" class="table" ng-show="existeClienteSelecionado()">
+					                    <thead>
+				                        	<tr>
+					                            <th>#</th>
+					                            <th>Nome</th>
+					                            <th>Telefone</th>
+					                            <th>Email</th>
+					                            <th>Empresa</th>
+					                            <th>CNPJ</th>
+					                            <th>Setor</th>
+					                            <th>CNAE</th>
+					                            <th><button tooltip="deselecionar todos" ng-click="deselecionarTodos()" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></button>
+					                            </th>
+				                        	</tr>
+					                    </thead>
+					                    
+					                    <tbody>
+					                        <tr ng-repeat="cliente in clientes | filter:{selecionado:true} | orderBy: 'nome'">
+					                            <td>{{$index}}</td>
+					                            <td>
+					                                {{cliente.nome}}
+					                            </td>
+					                            <td>
+					                                <span ng-bind-html="cliente.telefone | tel"></span>
+					                            </td>
+					                            <td>
+					                                {{cliente.email}}
+					                            </td>
+					                            <td>
+					                                {{cliente.empresa}}
+					                            </td>
+					                            <td>
+					                                {{cliente.cnpj | cnpj}}
+					                            </td>
+					                            <td>
+					                                {{cliente.setor}}
+					                            </td>
+					                            <td>
+					                                {{cliente.cnae}}
+					                            </td>
+					                            <td>
+													<button tooltip="deselecionar cliente" ng-click="deselecionarCliente(cliente.id)" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></button>
+					                            </td>
+					                        </tr>
+					                    </tbody>
+					                </table>
+								</div>
+							</div>
+							<div class="row" ng-show="pesquisou">
+								<div class="col-sm-10 col-sm-offset-1">
+									<div class="form-group" ng-show="existeClienteSelecionado()">
+										<br />
+										<button type="submit" ng-click="vincularClientesAoEvento()";
+											class="btn btn-primary center-block">Continuar</button>
+									</div>
+
+								</div>
+							</div>
+							</wz-step> <wz-step title="Enviar email aos participantes">
+
+							<div class="row">
+								<div class="col-sm-12">
+									<br />
+									<br />
+									<br />
+									<br />
+									<br />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-10 col-sm-offset-1">
+									<form class="form">
+										<div class="form-group">
+											<label for="">T&iacute;tulo</label> <input ng-model="email.titulo" class="form-control"
+												type="text" />
+										</div>
+										<div class="form-group">
+											<label for="">Corpo</label>
+											<textarea ng-model="email.corpo" class="form-control" name="" id="" cols="25"
+												rows="5"></textarea>
+										</div>
+										<div class="form-group">
+											<br />
+											<button type="submit" ng-click="enviarEmailAosParticipantes()"
+												class="btn btn-primary center-block">Enviar Email</button>
+										</div>
+
+									</form>
+								</div>
+							</div>
+							</wz-step> <wz-step title="Finalizar">
+
+							<div class="row">
+								<div class="col-sm-12">
+									<br />
+									<br />
+									<br />
+									<br />
+									<br />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-10 col-sm-offset-1">
+									<h3 class="text-center">Cria&ccedil;&atilde;o de evento finalizada</h3>
+									<div class="form-group">
+										<br />
+										<button type="submit" wz-finish	class="btn btn-primary center-block">Finalizar</button>
+									</div>
+								</div>
+							</div>
+							</wz-step>
+							</wizard>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

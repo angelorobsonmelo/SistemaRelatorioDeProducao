@@ -1,0 +1,38 @@
+<meta charset="UTF-8">
+<div class="container-fluid row">
+    <div style="margin-bottom: 20px"></div>
+    <div class="panel panel-primary ">
+        <div class="panel-heading"><h3 class="panel-title">Saída de Produto</h3></div>
+        <div class="panel-body">
+           
+                
+
+             
+  <dl>
+  <dt>Descrição:</dt>
+  <dd>{{projeto.descricao}}</dd>
+  <dt>Tipo da Folha</dt>
+  <dd>{{projeto.tipo_folha}}</dd>
+  <dt>Preço da Folha:</dt>
+  <dd>{{ projeto.valor | currency }}</dd>
+  <dt>Data de Recebimento:</dt>
+  <dd>{{dataRecebimentoVisualizar}}</dd>
+  <dt>Data Ìnicio:</dt>
+  <dd>{{dataInicioParaVisualizar}}</dd>
+  <dt>Data de Entrega</dt>
+  <dd>{{dataEntregaVisualizar}}</dd>
+  
+</dl>
+
+              
+
+              
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+						<button ng-click="back()" class="btn btn-primary">Voltar</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>

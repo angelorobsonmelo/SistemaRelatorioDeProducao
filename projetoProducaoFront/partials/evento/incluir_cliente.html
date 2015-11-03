@@ -1,0 +1,191 @@
+<div class="modal-header">
+		<button class="btn btn-primary btn-xs pull-right" ng-click="cancel()"><i class="fa fa-times"/></button>
+    
+        <h3>Incluir Cliente</h3>
+	
+	</div>
+    <div class="modal-body">
+        
+        
+        
+        
+        
+        
+        
+        <div class="row">
+	<div class="col-sm-12">
+		<div class="box box-primary">
+	            <div class="box-body">
+		             <div class="row">
+		                 <span class="text-bold col-sm-1">Filtros: </span>
+							<div class="col-sm-5">
+								<accordion>
+									<accordion-group is-open="opt_continua.status.open">
+										<accordion-heading>
+										<div>
+											Pesquisa<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': opt_continua.status.open, 'glyphicon-chevron-right': !opt_continua.status.open}"></i>
+										</div>
+										</accordion-heading>
+										<span class="text-bold">Pesquisa cont&iacute;nua</span>
+										<br/>
+										<input type="checkbox" ng-model="p1" ng-change="checkedteste(p1,1)"> - Indicadores de desempenho
+										<br/>
+										<input type="checkbox" ng-model="p2" ng-change="checkedteste(p2,2)"> - Indicadores de competitividade
+										<br/>
+										<input type="checkbox" ng-model="p3" ng-change="checkedteste(p3,3)"> - Sondagem industrial
+										<br/>
+										<input type="checkbox" ng-model="p4" ng-change="checkedteste(p4,4)"> - Sondagem ind&uacute;strial da constru&ccedil;&atilde;o
+										<br/>
+										<input type="checkbox" ng-model="p5" ng-change="checkedteste(p5,5)"> - Sondagens especiais
+										<br/>
+										<input type="checkbox" ng-model="p6" ng-change="checkedteste(p6,6)"> - Pesquisa de investimento na ind&uacute;stria
+										<br/>
+										<input type="checkbox" ng-model="p7" ng-change="checkedteste(p7,7)"> - An&aacute;lize da sondagem da ind&uacute;stria da constru&ccedil;&atilde;o
+										<br/>
+										<span class="text-bold">Pesquisa sob encomenda</span>
+										<br/>
+										<input type="checkbox" ng-model="p8" ng-change="checkedteste(p8,8)"> - Pesquisas setoriais industriais
+										<br/>
+										<input type="checkbox" ng-model="p9" ng-change="checkedteste(p9,9)"> - Perfis
+										<br/>
+										<input type="checkbox" ng-model="p10" ng-change="checkedteste(p10,10)"> - Diagn&oacute;sticos
+										<br/>
+										<input type="checkbox" ng-model="p11" ng-change="checkedteste(p11,11)"> - Estudos de mercado
+										<br/>
+									</accordion-group>
+								</accordion>
+							</div>
+						
+							<div class="col-sm-5">
+								<accordion>
+									<accordion-group is-open="opt_continua.status.open">
+										<accordion-heading>
+											<div>
+												Inova&ccedil;&atilde;o <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': opt_continua.status.open, 'glyphicon-chevron-right': !opt_continua.status.open}"></i>
+											</div>
+										</accordion-heading>
+										<span class="text-bold">Mobiliza&ccedil;&atilde;o para inova&ccedil;&atilde;</span>
+										<br/>
+										<input type="checkbox" ng-model="i1" ng-change="inovacaocheckteste(i1,1)"> - Palestras e eventos de sensibiliza&ccedil;&atilde;o
+										<br/>
+										<span class="text-bold">Capacita&ccedil;&atilde;o</span>
+										<br/>
+										<input type="checkbox" ng-model="i2" ng-change="inovacaocheckteste(i2,2)"> - Gest&atilde;o da inova&ccedil;&atilde;o
+										<br/>
+										<input type="checkbox" ng-model="i3" ng-change="inovacaocheckteste(i3,3)"> - Elabora&ccedil;&atilde;o e gerenciamento de projetos de inova&ccedil;&atilde;o
+										<br/>
+										<input type="checkbox" ng-model="i4" ng-change="inovacaocheckteste(i4,4)"> - Ambientes inovativos (com foco em open innovation);
+										<br/>
+										<span class="text-bold">Consultorias</span>
+										<br/>
+										<input type="checkbox" ng-model="i5" ng-change="inovacaocheckteste(i5,5)"> - Realiza&ccedil;&atilde;o de diagnosticos de inova&ccedil;&atilde;o
+										<br/>
+										<input type="checkbox" ng-model="i6" ng-change="inovacaocheckteste(i6,6)"> - Elabora&ccedil;&atilde;o e implanta&ccedil;&atilde;o de planos de inova&ccedil;&atilde;o
+										<br/>
+										<input type="checkbox" ng-model="i7" ng-change="inovacaocheckteste(i7,7)"> - Elabora&ccedil;&atilde;o de projetos de capta&ccedil;&atilde;o de recursos para inova&ccedil;&atilde;o
+										<br/>
+										<span class="text-bold">Garimpagem e divulga&ccedil;&atilde;o</span>
+										<br/>
+										<input type="checkbox" ng-model="i8" ng-change="inovacaocheckteste(i8,8)"> - Editais de inova&ccedil;&atilde;o
+										<br/>
+										<input type="checkbox" ng-model="i9" ng-change="inovacaocheckteste(i9,9)"> - Pr&eacute;mios de inova&ccedil;&atilde;o (P&eacute;mio nacional de inova&ccedil;&atilde;o e Finep);
+										<br/>
+										<input type="checkbox" ng-model="i10" ng-change="inovacaocheckteste(i10,10)"> - Casos de sucesso em gest&atilde;o da inova&ccedil;&atilde;o
+										<br/>
+										<span class="text-bold">Qualifica&ccedil;&atilde;o de profissionais/bolsistas para inova&ccedil;&atilde;o na empresa</span>
+										<br/>
+										<input type="checkbox" ng-model="i11" ng-change="inovacaocheckteste(i11,11)"> - Programa de inova talentos
+										<br/>
+										
+										
+									</accordion-group>
+								</accordion>
+							</div>
+					</div>
+			    </div>
+		
+			</div>
+		</div>
+	</div>
+<div class="row">
+    <div style="margin-bottom: 20px"></div>
+            <div class="panel panel-primary">
+                <div class="panel-heading"><div class="panel-title">Clientes</div></div>
+                <div class="panel-body">
+                <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+                <section>
+                    <div class="col-xs-3">
+                    <input type="text" ng-model="search" class="form-control" placeholder="Procurar"/>
+                    </div>
+                    
+                    
+                    <button ng-click="abrirCadastroCliente()" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span> Adicionar Cliente</button>
+                </section>
+
+                </div>
+                <table ng-table="tableParams" class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nome</th>
+                            <th>Telefone</th>
+                            <th>Email</th>
+                            <th>Empresa</th>
+                            <th>CNPJ</th>
+                            <th>Setor</th>
+                            <th>CNAE</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       <!-- <tr ng-repeat="cliente in clientes | filter:search | filter:filtrarPorPesquisa | orderBy: 'nome'"> -->
+                        <tr ng-repeat="cliente in clientes | filter:search | filter:{selecionado:true} | orderBy: 'nome'">
+                            <td>{{$index}}</td>
+                            <td>
+                                {{cliente.nome}}
+                            </td>
+                            <td>
+                                <span ng-bind-html="cliente.telefone | tel"></span>
+                            </td>
+                            <td>
+                                {{cliente.email}}
+                            </td>
+                            <td>
+                                {{cliente.empresa}}
+                            </td>
+                            <td>
+                                {{cliente.cnpj | cnpj}}
+                            </td>
+                            <td>
+                                {{cliente.setor}}
+                            </td>
+                            <td>
+                                {{cliente.cnae}}
+                            </td>
+                            <td>
+
+                                <button tooltip="Incluir ao evento" ng-click="incluir(cliente.id)" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-plus"></i></button>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+    </div>
+</div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </div>
+    <br/>
+    <br/>

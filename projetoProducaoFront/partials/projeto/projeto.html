@@ -1,0 +1,213 @@
+<meta charset="UTF-8">
+<div class="container-fluid">
+
+	<div class="row">
+		<div style="margin-bottom: 20px"></div>
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<div class="panel-title">Tabela de data Atual {{ dataAtual }}</div>
+			</div>
+			<div class="panel-body">
+				<alert ng-repeat="alert in alerts" type="alert.type"
+					close="closeAlert($index)">{{alert.msg}}</alert>
+				<section>
+					<div class="col-xs-3">
+						<input type="text" ng-model="search" class="form-control"
+							placeholder="Procurar" />
+					</div>
+
+
+					<button ng-click="abrirCadastroProjeto()"
+						class="btn btn-primary pull-right">
+						<span class="glyphicon glyphicon-plus"></span> Adicionar Projeto
+					</button>
+				</section>
+
+			</div>
+			<div class="table-responsive">
+			<table ng-table="tableParams" class="table">
+
+				<thead>
+					<tr>
+						<th>#</th>
+                        <th>Descrição</th>
+                        <th>Tipo de folha</th>
+                        <th>valor</th>
+                        <th>Data de Recebimento</th>
+                        <th>Data de Início</th>
+                        <th>Data de Entrega</th>
+                        <th>Ações</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+				
+   
+	<tr ng-repeat="item in dadosAtuais | filter: search">
+        <td>{{ $index + 1 }}</td>
+         <td>{{ item.descricao }}</td>
+        <td>{{ item.folha }}</td>
+        <td>{{ item.valor | currency }}</td>
+        <td>{{ item.dataRecebimento }}</td>
+        <td>{{ item.dataInicio }}</td>
+        <td>{{ item.dataEntrega }}</td>
+
+
+						<td><a ng-href="#/projeto-ver/{{item.id}}"
+							class="btn btn-default btn-xs"><i class="fa fa-eye"></i></a> 
+                              <a  class="btn btn-primary btn-xs" ng-href="#/editar-agenda/{{ item.id }}"><i class="fa fa-edit"></i></a>
+                        <a ng-href="" ng-click="excluir(item.id, item)"  class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+					</tr>
+				</tbody>
+				 <tr><td><b>Total: </b> {{ somaMesAtual | currency }}</td></tr>
+			</table>
+			</div>
+		</div>
+
+	</div>
+	
+	 <div class="control-group" >
+	 
+	   <div class="control-group text-center" >
+                <label class="control-label " for="mostrar">Mostrar tabela dos meses anteriores</label>
+                <div class="controls">
+                    <input id="mostrar"  ng-model="mostrarTabela" type="checkbox" placeholder="E-mail" ng-click="mostrar()" class="checkbox-inline form-control" />
+            
+                </div>
+            </div>
+                   
+	
+	<div ng-show="mostrarTabelaAnterior" class="row">
+		<div style="margin-bottom: 20px"></div>
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<div class="panel-title">Tabela de data Anteriores</div>
+			</div>
+			<div class="panel-body">
+				<alert ng-repeat="alert in alerts" type="alert.type"
+					close="closeAlert($index)">{{alert.msg}}</alert>
+					<div class="col-xs-3">
+						<input type="text" ng-model="searchOld" class="form-control"
+							placeholder="Procurar" />
+					</div>
+			</div>
+			<div class="table-responsive">
+			<table ng-table="tableParams" class="table">
+
+				<thead>
+					<tr>
+						<th>#</th>
+                        <th>Descrição</th>
+                        <th>Tipo de folha</th>
+                        <th>valor</th>
+                        <th>Data de Recebimento</th>
+                        <th>Data de Início</th>
+                        <th>Data de Entrega</th>
+                        <th>Ações</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+				
+   
+	<tr ng-repeat="item in dadosAntigos | filter: searchOld">
+        <td>{{ $index + 1 }}</td>
+         <td>{{ item.descricao }}</td>
+        <td>{{ item.folha }}</td>
+        <td>{{ item.valor | currency }}</td>
+        <td>{{ item.dataRecebimento }}</td>
+        <td>{{ item.dataInicio }}</td>
+        <td>{{ item.dataEntrega }}</td>
+
+
+						<td><a ng-href="#/projeto-ver/{{item.id}}"
+							class="btn btn-default btn-xs"><i class="fa fa-eye"></i></a> 
+                              <a  class="btn btn-primary btn-xs" ng-href="#/editar-agenda/{{ item.id }}"><i class="fa fa-edit"></i></a>
+                        <a ng-href="" ng-click="excluir(item.id, item)" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+					</tr>
+				</tbody>
+				 <tr><td>{{ somaMesAntigo | currency }}</td></tr>
+			</table>
+			</div>
+		</div>
+
+	</div>
+	
+</div>
+
+<script type="text/ng-template" id="add_projeto_modal">
+    <div class="modal-header">
+		<button class="btn btn-primary btn-xs pull-right" ng-click="cancel()"><i class="fa fa-times"/></button>
+    
+        <h3>Projeto</h3>
+	
+	</div>
+    <div class="modal-body">
+        <!--<alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>-->
+        <form name="clienteForm" class="form-horizontal" ng-submit="add()">
+            <div class="control-group">
+                <label class="control-label" for="nome">Descrição</label>
+                <div class="controls">
+                    <input id="nome" name="nome"  ng-model="projeto.descricao" type="text" placeholder="Nome" class="form-control" ng-required="true"  ng-class="{error: user.name.$invalid && !user.name.$pristine}"/>
+                </div>
+            </div>
+
+            <div class="control-group" >
+                <label class="control-label" for="telefone">Tipo da folha</label>
+                <div class="controls">
+          <select id="produto"  ng-model="projeto.id_folha" ng-change="pegarId()" class="form-control" required>
+            <option  ng-repeat="item in folhas" value="{{item.id}}" ng-bind="item.tipo_folha"> </option>
+            <option value="" selected>Selecione...</option>
+
+         </select>
+</div>
+            </div>
+
+            <div class="control-group" >
+                <label class="control-label" for="email">Valor</label>
+                <div class="controls">
+                    <input id="email" name="email" ng-model="usuario.email" type="hidden" placeholder="E-mail" class="form-control" ng-required="true" />
+            <span class="form-control">{{ folha.valor | currency }}</span> 
+                </div>
+            </div>
+
+          <div class="control-group" >
+                <label class="control-label" for="email">Data de recebimento</label>
+                <div class="controls">
+                  <input type="date" class="form-control " id="txtSenha" name="senha"  required placeholder="Data de Recebimento" ng-model="projeto.data_recebimento"/>
+                </div>
+            </div>
+
+          <div class="control-group" >
+                <label class="control-label" for="email">Data de início</label>
+                <div class="controls">
+                    <input type="date" class="form-control "  ng-model="projeto.data_inicio" id="repetir_senha"   required  placeholder="Data de Início"    />
+                </div>
+            </div>
+
+         <div class="control-group" >
+                <label class="control-label" for="email">Data de Entrega</label>
+                <div class="controls">
+                    <input type="date" class="form-control "  ng-model="projeto.data_entrega" id="repetir_senha"   required  placeholder="Data de Entrega"    />
+                </div>
+            </div>
+
+
+            <div class="control-group" >
+                <br/>
+                <div class="pull-right">
+                    
+                   
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Adicionar</button>
+
+                    <button type="button" ng-click="cancel()" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Cancelar</button>
+                </div>
+
+
+            </div>
+
+        </form>
+    </div>
+    <br/>
+    <br/>
+</script>

@@ -1,0 +1,73 @@
+<div class="container-fluid">
+
+<div class="row">
+        
+        <div class="col-sm-12">
+
+                <div class="box box-solid box-primary">
+                    <div class="box-header">
+                        <div class="box-title">Evento: {{eventoVisto.nome}}</div>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-primary btn-sm" ng-click="isCollapsed = !isCollapsed" >
+                                <i class="fa" ng-class="{'fa-minus': !isCollapsed, 'fa-plus': isCollapsed}"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body" collapse="isCollapsed">
+                        <span class="text-bold">Data:</span> {{eventoVisto.data | date : 'dd/MM/yyyy'}}
+                        <br/>
+                        
+                        <span class="text-bold">Categoria:</span> <span ng-bind="descricaoCategoriaEventoPorId(eventoVisto.categoria)"></span>
+                        <br/>
+                        <span class="text-bold">Tipo:</span> <span ng-bind="descricaoTipoEventoPorId(eventoVisto.tipo)"></span>
+                        <br/><br/>
+                        <span class="text-bold">Clientes:</span>
+                        <button ng-click="abrirIncluirCliente()" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i>Incluir Cliente</button>                  
+                        <br/> <br/>
+                        <div class="well">
+                            <table class="table">
+                            	<thead>
+                            		<tr>
+                            			<th>#</th>
+                            			<th>Nome</th>
+                            			<th>Telefone</th>
+                            			<th>Email</th>
+                            			<th>Empresa</th>
+                            			<th><i class="fa fa-envelope"></i></th>
+                            		</tr>
+                            	</thead>
+                            	<tbody>
+                            		<tr ng-repeat="cliente in eventoVisto.clientes">
+                            			<td>{{$index}}</td>
+                            			<td><a ng-href="#/cliente/{{cliente.id}}">{{cliente.nome}}</a></td>
+                            			<td>{{cliente.telefone | tel}}</td>
+                            			<td>{{cliente.email}}</td>
+                            			<td>{{cliente.empresa}}</td>
+                            			<td>
+                            				<span ng-if="cliente.emailEnviado">
+                            					<i class="fa fa-check text-green"></i>
+                            				</span>
+                            				<span ng-if="!cliente.emailEnviado">
+                            					<button ng-click="reenviarEmail(cliente.id,eventoVisto.id)" class="btn btn-default btn-xs" tooltip="Reenviar email">
+                            						<i class="fa fa-exclamation text-yellow"></i>
+                            					</button>
+                            				</span>
+                            				
+                           				</td>
+                            		</tr>
+                            	</tbody>
+                            </table>
+						</div>
+						<div class="row">
+		                    <div class="col-sm-12">
+								<button ng-click="back()" class="btn btn-primary">Voltar</button>
+		                    </div>
+		                </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

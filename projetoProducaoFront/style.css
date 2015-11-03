@@ -1,0 +1,37 @@
+.tamanho-logo{
+	height: 60px;
+	width: 95%;
+	margin-top: -2%;
+}
+
+.centro{
+	font-size: 2em;
+}
+
+
+.rodape {
+	
+	
+	margin-top: 60px;
+
+}
+
+.hidden-check-agendado {
+    visibility: hidden;
+}
+
+.hidden-check-iniciado {
+    visibility: hidden;
+}
+
+.hidden-check-terminado {
+    visibility: hidden;
+}
+
+.button-acao {
+
+
+}
+
+
+

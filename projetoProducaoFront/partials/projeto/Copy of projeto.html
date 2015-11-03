@@ -1,0 +1,76 @@
+<meta charset="utf-8" />
+<form ng-submit="add()">
+<label for="descricao">Decrição</label>
+<input id="descricao" type="text" class="form-control" ng-model="projeto.descricao" />
+
+<label for="descricao">Tipo da folha</label>
+<select id="produto"  ng-model="projeto.idFolha" ng-change="pegarId()" class="form-control" required>
+<option  ng-repeat="item in folhas" value="{{item.id}}" ng-bind="item.tipoFolha"> </option>
+<option value="" selected>Selecione...</option>
+
+</select>
+
+<label for="valor">Valor:</label>
+<input  id="valor" type="hidden" class="input-sm" ng-model="folha.valor" />
+<span class="form-control">{{ folha.valor | currency }}</span> 
+
+<label for="dataRecebimento">Data de Recebimento</label>
+<input  id="dataRecebimento" type="date" class="form-control" ng-model="projeto.data_recebimento" />
+
+<label for="dataRecebimento">Data de Inicio</label>
+<input  id="dataRecebimento" type="date" class="form-control" ng-model="projeto.data_inicio" />
+
+<button class="btn btn-primary btn-lg" type="submit">Cadastrar</button>
+
+</form><br />
+
+<input type="text" ng-model="search" class="form-control" />
+<table class="table table-striped">
+  <tr>
+        <th>#</th>
+        <th>Descrição</th>
+        <th>Tipo de folha</th>
+        <th>valor</th>
+        <th>Data de Recebimento</th>
+        <th>Data de Início</th>
+        <th>Data de Entrega</th>
+
+    </tr>
+
+    <tr ng-repeat="item in projetos | filter: search">
+        <td>{{ $index + 1 }}</td>
+         <td>{{ item.descricao }}</td>
+        <td>{{ item.folha.tipoFolha }}</td>
+        <td>{{ item.folha.valor | currency }}</td>
+        <td>{{ item.dataRecebimento }}</td>
+        <td>{{ item.dataInicio }}</td>
+        <td>{{ item.dataEntrega }}</td>
+    </tr>
+    <tr><th>Total</th></tr>
+    <tr><td>{{ somaMesAtual | currency }}</td></tr>
+</table>
+
+<hr/>
+
+
+<table class="table table-striped">
+  <tr>
+         <th>#</th>
+        <th>Descrição</th>
+        <th>Tipo de folha</th>
+        <th>valor</th>
+        <th>Data de Recebimento</th>
+        <th>Data de Início</th>
+        <th>Data de Entrega</th>
+
+    </tr>
+
+    <tr ng-repeat="item in atual">
+        <td>{{ item.id }}</td>
+        <td>{{ item.data.getMonth() }}</td>
+        <td>{{ item.data.getFullYear() }}</td>
+        <td>{{ item.valor | currency}}</td>
+    </tr>
+    <tr><th>Total</th></tr>
+    <tr><td>{{ somaAtual | currency }}</td></tr>
+</table>

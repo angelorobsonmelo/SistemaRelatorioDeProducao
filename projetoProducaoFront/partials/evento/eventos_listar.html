@@ -1,0 +1,85 @@
+<div class="container-fluid">
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box box-primary">
+            <div class="box-body">
+             <div class="row">
+                 <span class="text-bold col-sm-1">Filtros: </span>
+                 <div class="col-sm-5">
+                     <select class="form-control" ng-model="filtro.categoria" ng-change="resetTipo()">
+                         <option value=""> - Categoria -</option>
+				<option ng-repeat="categoria in categoriasEvento" ng-value="categoria.id">{{categoria.descricao}}</option>
+				
+                     </select>
+                 </div>
+                 <div class="col-sm-5">
+                  <select class="form-control" ng-model="filtro.tipo">
+                      <option value=""> - Tipo -</option>
+                      <option ng-repeat="tipo in tiposEvento" ng-value="tipo.id" ng-if="tipo.categoria == filtro.categoria" >{{tipo.descricao}}</option>
+                      
+                  </select>
+                 </div>
+             </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div style="margin-bottom: 20px"></div>
+            <div class="panel panel-primary">
+                <div class="panel-heading"><div class="panel-title">Eventos</div></div>
+                <div class="panel-body">
+                <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+                <section>
+                    <div class="col-xs-3">
+                    <input type="text" ng-model="search" class="form-control" placeholder="Procurar"/>
+                    </div>
+                    <a ng-href="#/eventos/novo" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span> Criar Evento</a>
+                </section>
+
+                </div>
+                <table ng-table="tableParams" class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nome</th>
+                            <th>Data</th>
+                            <th>Categoria</th>
+                            <th>Tipo</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="evento in eventos | filter: filtro | filter:search | orderBy: 'data'">
+                            <td>{{$index}}</td>
+                            <td>
+                                {{evento.nome}}
+                            </td>
+                            <td>
+                                {{evento.data | date : 'dd/MM/yyyy'}}
+                            </td>
+                            <td>
+                                {{descricaoCategoriaEventoPorId(evento.categoria)}}
+                            </td>
+                            <td>
+                                {{descricaoTipoEventoPorId(evento.tipo)}}
+                            </td>
+                            <td>
+                                <a ng-href="#/evento/{{evento.id}}" class="btn btn-default btn-xs"><i class="fa fa-eye"></i></a>
+                                <!--
+                                <a class="btn btn-default btn-xs" ng-click="verCliente(cliente.id)"><i class="fa fa-eye"></i></a>
+                                -->
+                                <!--
+                                <a ng-if="!evento.$edit" href="" class="btn btn-primary btn-xs" ng-click="abrirEdicaoEvento(evento.id)"><i class="fa fa-edit"></i></a>
+                                -->
+                                <a ng-if="!evento.$destroy" ng-click="abrirDeletarEventoDialog(evento.id)" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+    </div>
+</div>

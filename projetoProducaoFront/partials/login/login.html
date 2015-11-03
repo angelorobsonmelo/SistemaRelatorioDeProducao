@@ -1,0 +1,77 @@
+<meta charset="ISO-8859-1">
+<style>
+
+.glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+</style>
+<div class="tentralizar-div">
+ <div class="text-center">
+
+		
+		<img src="img/angelo-logo.png" alt="s" />
+		<h2>Login</h2>
+
+	</div>
+	<div class=".container">
+    <form role="form" ng-submit="autenticar()" >
+    <span class="entypo-user inputUserIcon"></span>
+    <input  type="email" class="form-control " placeholder="Email" ng-model="usuario.email" required="required"/><br />
+    <span class="entypo-key inputPassIcon"></span>
+    <input type="password" class="form-control " placeholder="Senha" ng-model="usuario.senha" required="required" /><br />
+    <button  type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+   </form><br />
+   
+    <script type="text/ng-template" id="esqueceu-senha.html">
+ <form ng-submit="ok()">
+        <div class="modal-header">
+            <h3 class="modal-title text-center">Esqueceu senha</h3>
+        </div>
+        <div class="modal-body">
+
+             <strong>Aviso!</strong> <p>Enviaremos um email com as instruções necessárias para a recuperação da senha.</p>
+            
+            <label>Digite seu email:</label><br />
+            <input type="email" class="form-control" ng-model="usuario.email" required >
+           
+           
+        </div>
+        <div class="modal-footer "> 
+            <div ng-show="erroAoEnviarEmail" class="alert alert-danger" role="alert"><strong>Aviso!</strong> Erro ao enviar email, verifique sua conexão e tente novamente.</div>
+            <div ng-show="sucessoAoEnviarEmail" class="alert alert-success" role="alert"><strong>Aviso!</strong> Email enviado com sucesso!</div>
+            <div ng-show="emailNaoExiste" class="alert alert-warning" role="alert"><strong>Aviso!</strong> este email não existe no nosso banco de dados. Verifique o email digitado e tente novamente!</div>
+
+            <button  class="btn btn-warning" ng-show="enviando"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Enviando...</button>
+            <button type="submit"  class="btn btn-primary"  ng-show="esconder"  >OK</button>
+            <a href="" class="btn btn-warning" ng-click="cancel()" >Cancel</a>
+
+            
+        </div>
+</form>
+    </script>
+
+    
+    <a href="" ng-click="open()" >Esqueceu a senha?</a>
+
+</div>
+
+
+ <div class="text-center rodape ">
+
+		
+		
+		<h4><i>Desenvolvido por Ângelo Robson<i></h4>
+
+	</div>
+

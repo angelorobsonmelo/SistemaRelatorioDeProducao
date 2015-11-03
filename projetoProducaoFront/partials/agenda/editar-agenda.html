@@ -1,0 +1,47 @@
+<meta charset="utf-8" />
+<form ng-submit="atualizar()">
+<label for="descricao">Decrição</label>
+<input id="descricao" type="text" class="form-control" ng-model="projeto.descricao" />
+
+<label for="valor">Folha Atual:</label>
+<input  id="valor" type="text" readonly="readonly" class="form-control" ng-model="projeto.tipo_folha" />
+<label for="valor">Valor atual:</label>
+<input  id="valor" type="hidden" class="input-sm" ng-model="projeto.folha.valor" />
+<span class="form-control">{{ projeto.valor| currency }}</span>
+
+<label for="descricao">Folha substituta</label>
+<select id="produto"  ng-model="projeto.id_folha" ng-change="pegarId()" class="form-control" required>
+<option  ng-repeat="item in folhas" value="{{item.id}}" ng-bind="item.tipo_folha"> </option>
+<option value="" selected>Selecione...</option>
+</select>
+
+<label for="valor">Valor que substituto:</label>
+<input  id="valor" type="hidden" class="input-sm" ng-model="folha.valor" />
+<span class="form-control">{{ folha.valor | currency }}</span> 
+
+<label for="dataRecebimento">Data de Recebimento</label>
+<input  id="dataRecebimento" type="date" class="form-control" ng-model="projeto.data_recebimento" />
+
+<div ng-class="{'hidden-check-agendado':projeto.status == 'A', '': projeto.status == 'I'}">
+<label for="dataRecebimento" >Data de Inicio</label>
+<input  id="dataRecebimento" type="date" class="form-control" ng-model="projeto.data_inicio"  />
+</div>
+
+<div ng-class="{'hidden-check-agendado':projeto.status != 'T'}">
+<label for="dataRecebimento" >Data de Entrega</label>
+<input  id="dataRecebimento" type="date" class="form-control" ng-model="projeto.data_entrega"  />
+</div>
+<div class="control-group" >
+                <br/>
+                <div class="pull-left">
+                    
+                   
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Salvar</button>
+
+                    <button type="button" ng-click="back()" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Voltar</button>
+                </div>
+
+
+            </div>
+
+

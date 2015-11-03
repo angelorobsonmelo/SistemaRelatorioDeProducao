@@ -1,0 +1,21 @@
+  <meta charset="UTF-8">
+<div class="tentralizar-div-cad-usuario">
+ <div class="text-center">
+
+<img src="img/LogoIEL2.png" alt="s" />
+		<h2>Cadastrar Usuário</h2>
+		
+		
+	</div>
+ <form ng-submit="salvarUsuario()">
+    
+    <input type="text" required="required" class="form-control input-lg" placeholder="Nome" ng-model="usuario.nome"/><br />
+    <input type="text" required="required" class="form-control input-lg" placeholder="Sobrenome" ng-model="usuario.sobreNome"/><br />
+    <input type="email" class="form-control input-lg" placeholder="Email" required ng-model="usuario.email"/><br />
+    <input type="password" class="form-control input-lg" id="txtSenha" name="senha" type="password" required placeholder="Senha" title="Senha" ng-model="usuario.senha"/><br />
+    <input type="password" class="form-control input-lg" ng-model="repetirSenha" id="repetir_senha" name="repetir_senha" type="password" required  placeholder="Repetir Senha" title="Repetir Senha" oninput="validaSenha(this)"  /><br />
+    <button type="submit" class="btn btn-primary btn-lg btn-block" >Cadastrar</button><br />
+</form>
+<a class="centro  glyphicon glyphicon-arrow-left" ng-href="#/" href="#/"></a>
+</div>
+

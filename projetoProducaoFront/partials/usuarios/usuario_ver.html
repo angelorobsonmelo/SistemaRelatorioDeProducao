@@ -1,0 +1,45 @@
+<meta charset="UTF-8">
+<div class="container-fluid row">
+    <div style="margin-bottom: 20px"></div>
+    <div class="panel panel-primary ">
+        <div class="panel-heading"><h3 class="panel-title">Usuário</h3></div>
+        <div class="panel-body">
+            <div >
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="col-sm-2 text-bold">Nome: </div>
+                        <div class="col-sm-4">{{usuarioVisto.nome}}</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="col-sm-2 text-bold">Sobrenome: </div>
+                        <div class="col-sm-4"><span ng-bind-html="usuarioVisto.sobreNome"></span></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="col-sm-2 text-bold">Email</div>
+                        <div class="col-sm-4">{{usuarioVisto.email}}</div>
+                    </div>
+                    <div class="col-sm-4"></div>
+                </div>
+
+             
+
+              
+
+              
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+						<button ng-click="back()" class="btn btn-primary">Voltar</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

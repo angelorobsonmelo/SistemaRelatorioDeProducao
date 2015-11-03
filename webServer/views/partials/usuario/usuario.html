@@ -1,0 +1,69 @@
+<form name="usuario-form" ng-submit="cadastrar();">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Nome</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter email"
+               ng-model="usuario.nome">
+    </div>
+    <div class="form-group">
+        <label for="">Sobrenome</label>
+        <input type="text" class="form-control" id="" placeholder="Sobrenome" ng-model="usuario.sobrenome">
+    </div>
+    <div class="form-group">
+        <label for="">Email</label>
+        <input type="text" class="form-control" id="" placeholder="Email" ng-model="usuario.email">
+    </div>
+    <div class="form-group">
+        <label for="">Senha</label>
+        <input type="password" class="form-control" id="" placeholder="Senha" ng-model="usuario.senha">
+    </div>
+
+    <div class="form-group">
+        <label for="">Profissão</label>
+        <select class="form-control" ng-model="usuario.status">
+            <option value="D">Desenhista</option>
+            <option value="E">Engenheiro</option>
+            <option value="" selected>Selecione...</option>
+
+        </select>
+    </div>
+    <p>
+        <button type="button" ng-click="save()" ng-if="usuario.id" ng-disabled="usuario.$invalid"
+                class="btn btn-primary btn-lg"><i class="fa fa-save"></i> Atualizar
+        </button>
+        <button type="submit" class="btn btn-primary btn-lg" ng-if="!usuario.id" ng-disabled="usuario.$invalid">
+            Cadastrar
+        </button>
+        <button type="button" class="btn btn-primary btn-lg" ng-click="limpar()">Limpar</button>
+    </p>
+</form>
+
+<hr/>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Sobrenome</th>
+            <th>Email</th>
+            <th>Senha</th>
+            <th>Profissão</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in usuarios">
+            <td>{{ $index + 1 }}</td>
+            <td>{{ item.nome }}</td>
+            <td>{{ item.sobrenome }}</td>
+            <td>{{ item.email }}</td>
+            <td>{{ item.senha }}</td>
+            <td>{{ item.status }}</td>
+            <td><a href="" ng-click="excluir(item.id)">Excluir </a>/ <a href="" ng-click="pesquisarUsuario(item.id)">Alterar</a>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>

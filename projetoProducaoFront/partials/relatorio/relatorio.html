@@ -1,0 +1,88 @@
+<meta charset="utf-8" />
+<div class="container-fluid">
+
+<div class="row">
+<div class="panel panel-primary">
+			<div class="panel-heading">
+				<div class="panel-title">Tabela de data Atual {{ dataAtual }}</div>
+			</div>
+			<div class="panel-body">
+			<form ng-submit="exibirRelatorio()">
+			
+		    <div class="control-group" >
+                <label class="control-label" for="de">De:</label>
+                <div class="controls">
+                    <input type="date" class="form-control "  ng-model="projeto.de" id="de"   required  placeholder="De"    />
+                </div>
+            </div>
+            
+             <div class="control-group" >
+                <label class="control-label" for="a">A:</label>
+                <div class="controls">
+                    <input type="date" class="form-control "  ng-model="projeto.a" id="a"   required  placeholder="A"    />
+                </div>
+            </div><br />
+            <div class="control-group pull-left">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-bar-chart-o"></i> Exibir Relatório</button>
+
+                <div class="control-group pull-right">
+                    <button ng-show="esconderBotaoImprimir" type="button" ng-click="imprimirRelatorio(projeto)" class="btn btn-primary" ><i class="fa fa-bar-chart-o"></i> Download do Relatório</button>
+                </div>
+
+            </div>
+            
+            </form>
+
+
+            <br /><br /><br />
+				
+					<div class="col-xs-3">
+						<input type="text" ng-model="search" class="form-control"
+							placeholder="Procurar" />
+					</div>
+					
+
+			</div>
+			<div class="table-responsive">
+			<table ng-table="tableParams" class="table">
+
+				<thead>
+					<tr>
+						<th>#</th>
+                        <th>Descrição</th>
+                        <th>Tipo de folha</th>
+                        <th>valor</th>
+                        <th>Data de Recebimento</th>
+                        <th>Data de Início</th>
+                        <th>Data de Entrega</th>
+<!--                         <th>Ações</th> -->
+						
+					</tr>
+				</thead>
+				<tbody>
+				
+   
+	<tr ng-repeat="item in relatorio | filter: search">
+        <td>{{ $index + 1 }}</td>
+         <td>{{ item.descricao }}</td>
+        <td>{{ item.tipo_folha }}</td>
+        <td>{{ item.valor | currency }}</td>
+        <td>{{ item.data_recebimento }}</td>
+        <td>{{ item.data_inicio }}</td>
+        <td>{{ item.data_entrega }}</td>
+
+
+<!-- 						<td><a ng-href="#/projeto-ver/{{item.id}}" -->
+<!-- 							class="btn btn-default btn-xs"><i class="fa fa-eye"></i></a>  -->
+<!--                               <a  class="btn btn-primary btn-xs" ng-href="#/editar/{{ item.id }}"><i class="fa fa-edit"></i></a> -->
+<!--                         <a ng-href="" ng-click="excluir(item.id, item)"  class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a> -->
+					</tr>
+				</tbody>
+				 <tr><td><b>Total: </b> {{ resultadoTotal | currency }}  </td></tr>
+			</table>
+			</div>
+		</div>
+    </div>
+
+</div>
+

@@ -1,0 +1,72 @@
+<!-- <meta charset="UTF-8">
+<br />
+<section>
+<form role="form" ng-submit="redefinirSenha();">
+  <div class="form-group">
+    <div class="input-group">
+      <label class="sr-only" for="exampleInputEmail2">Email address</label>
+      <div class="input-group-addon">@</div>
+      <input readonly="readonly" type="email" class="form-control" id="exampleInputEmail2" required ng-model="usuario.email" placeholder="Enter email">
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="txtSenha">Nova Senha (*)</label>
+    <input class="form-control"   id="txtSenha" name="senha" type="password"  placeholder="Digite uma Senha" title="Senha" ng-model="usuario.senha" required />
+  </div>
+  
+  <div class="form-group">
+    <label for="repetir_senha">Confirmar Nova Senha (*)</label>
+     <input class="form-control"  id="repetir_senha" name="repetir_senha" type="password" required  placeholder="Repetir Senha" title="Repetir Senha" oninput="validaSenha(this)" />
+  </div>
+  <button type="submit" class="btn btn-default">Sign in</button>
+</form>
+</section> -->
+
+
+<style>
+
+.glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+</style>
+<div class="tentralizar-div">
+ <div class="text-center">
+
+		<h2>Redefinição da Nova Senha</h2>
+	</div>
+    <form role="form" ng-submit="redefinirSenha();" >
+    <span class="entypo-user inputUserIcon"></span>
+    <div class="form-group">
+    <div class="input-group">
+      <label class="sr-only" for="exampleInputEmail2">Email address</label>
+      <div class="input-group-addon">@</div>
+      <input readonly="readonly" type="email" class="form-control" id="exampleInputEmail2" required ng-model="usuario.email" placeholder="Enter email">
+    </div>
+  	</div>
+  	
+  	<div class="form-group">
+    <label for="txtSenha">Nova Senha (*)</label>
+    <input class="form-control"   id="txtSenha" name="senha" type="password"  placeholder="Digite uma Senha" title="Senha" ng-model="usuario.senha" required />
+  </div>
+  
+  <div class="form-group">
+    <label for="repetir_senha">Confirmar Nova Senha (*)</label>
+     <input class="form-control"  id="repetir_senha" name="repetir_senha" type="password" required  placeholder="Repetir Senha" title="Repetir Senha" oninput="validaSenha(this)" />
+  </div>
+    
+    <button  type="submit" class="btn btn-primary btn-lg btn-block">Redefinir Senha</button>
+   </form>
+   
+    

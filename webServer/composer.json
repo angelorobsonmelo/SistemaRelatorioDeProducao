@@ -1,0 +1,6 @@
+{
+    "require": {
+        "slim/slim": "2.*",
+        "dompdf/dompdf": "dev-master"
+    }
+}

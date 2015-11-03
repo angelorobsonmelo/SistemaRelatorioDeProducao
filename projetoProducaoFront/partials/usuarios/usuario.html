@@ -1,0 +1,170 @@
+<meta charset="UTF-8">
+<div class="container-fluid">
+
+	<!--
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box box-primary">
+            <div class="box-body">
+             <div class="row">
+                 <span class="text-bold col-sm-1">Filtros: </span>
+                 <div class="col-sm-5">
+                     <select class="form-control" ng-model="filtro1" ng-change="filtrochange()">
+                         
+                         <option value=""> - Pesquisa cont&iacute;nua -</option>
+                         <option ng-repeat="pesquisa in pesquisas | filter:{tipo:1}" ng-value="pesquisa.id">{{pesquisa.descricao}}</option>
+                         
+				
+                     </select>
+                 </div>
+                 <div class="col-sm-5">
+                  <select class="form-control" ng-model="filtro2" ng-change="filtrochange()">
+                  
+                      <option value=""> - Pesquisa sob encomenda -</option>
+                  
+                      <option ng-repeat="pesquisa in pesquisas | filter:{tipo:2}" ng-value="pesquisa.id">{{pesquisa.descricao}}</option>
+                   
+                  </select>
+                 </div>
+             </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+-->
+
+
+
+
+	<div class="row">
+		<div style="margin-bottom: 20px"></div>
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<div class="panel-title">Usuários</div>
+			</div>
+			<div class="panel-body">
+				<alert ng-repeat="alert in alerts" type="alert.type"
+					close="closeAlert($index)">{{alert.msg}}</alert>
+				<section>
+					<div class="col-xs-3">
+						<input type="text" ng-model="search" class="form-control"
+							placeholder="Procurar" />
+					</div>
+
+
+					<button ng-click="abrirCadastroCliente()"
+						class="btn btn-primary pull-right">
+						<span class="glyphicon glyphicon-plus"></span> Adicionar Usuário
+					</button>
+				</section>
+
+			</div>
+			<table ng-table="tableParams" class="table">
+
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Nome</th>
+						<th>Sobrenome</th>
+						<th>Email</th>
+						<th>Ação</th>
+
+
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- <tr ng-repeat="cliente in clientes | filter:search | filter:filtrarPorPesquisa | orderBy: 'nome'"> -->
+					<tr
+						ng-repeat="usuario in usuarios | filter:search | orderBy: 'nome'">
+						<td>{{$index + 1}}</td>
+						<td>{{usuario.nome}}</td>
+
+						<td>{{usuario.sobreNome}}</td>
+						<td>{{usuario.email}}</td>
+
+
+						<td><a ng-href="#/usuarios/{{usuario.id}}"
+							class="btn btn-default btn-xs"><i class="fa fa-eye"></i></a> <!--
+                                <a class="btn btn-default btn-xs" ng-click="verCliente(cliente.id)"><i class="fa fa-eye"></i></a>
+<!--                                 --> <a ng-if="!usuario.$edit" href="" -->
+<!-- 							class="btn btn-primary btn-xs" -->
+<!-- 							ng-click="abrirEditarUsuario(usuario.id)"><i -->
+<!-- 								class="fa fa-edit"></i></a> <a ng-if="!usuario.$destroy" -->
+<!-- 							ng-click="abrirDeletarCliente(usuario.id)" -->
+<!-- 							class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a></td> -->
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+</div>
+</div>
+
+<script type="text/ng-template" id="add_cliente_modal">
+    <div class="modal-header">
+		<button class="btn btn-primary btn-xs pull-right" ng-click="cancel()"><i class="fa fa-times"/></button>
+    
+        <h3>Usuário</h3>
+	
+	</div>
+    <div class="modal-body">
+        <!--<alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>-->
+        <form name="clienteForm" class="form-horizontal" ng-submit="add()">
+            <div class="control-group">
+                <label class="control-label" for="nome">Nome</label>
+                <div class="controls">
+                    <input id="nome" name="nome" ng-model="usuario.nome" type="text" placeholder="Nome" class="form-control" ng-required="true"  ng-class="{error: user.name.$invalid && !user.name.$pristine}"/>
+                </div>
+            </div>
+
+            <div class="control-group" >
+                <label class="control-label" for="telefone">Sobrenome</label>
+                <div class="controls">
+                    <input id="Sobrenome" placeholder="Sobrenome" name="Sobrenome" ng-model="usuario.sobreNome" type="text" class="form-control" ng-required="true" />
+                </div>
+            </div>
+
+            <div class="control-group" >
+                <label class="control-label" for="email">E-mail</label>
+                <div class="controls">
+                    <input id="email" name="email" ng-model="usuario.email" type="email" placeholder="E-mail" class="form-control" ng-required="true" />
+                </div>
+            </div>
+
+          <div class="control-group" >
+                <label class="control-label" for="email">Senha</label>
+                <div class="controls">
+                  <input type="password" class="form-control " id="txtSenha" name="senha" type="password" required placeholder="Senha" title="Senha" ng-model="usuario.senha"/>
+                </div>
+            </div>
+
+          <div class="control-group" >
+                <label class="control-label" for="email">Senha</label>
+                <div class="controls">
+                    <input type="password" class="form-control " ng-model="repetirSenha" id="repetir_senha" name="repetir_senha" type="password" required  placeholder="Repetir Senha" title="Repetir Senha" oninput="validaSenha(this)"  />
+                </div>
+            </div>
+
+
+            <div class="control-group" >
+                <br/>
+                <div class="pull-right">
+                    
+                   
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Adicionar</button>
+
+                    <button type="button" ng-click="cancel()" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Cancelar</button>
+                </div>
+
+
+            </div>
+
+        </form>
+    </div>
+    <br/>
+    <br/>
+</script>
